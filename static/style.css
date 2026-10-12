@@ -1,0 +1,39 @@
+:root{--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#64748b;--primary:#4f46e5;--danger:#dc2626;--border:#cbd5e1}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.4}
+.card{max-width:640px;margin:24px auto;padding:24px;background:var(--card);border-radius:14px;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+h1{margin:0 0 16px;font-size:1.6rem}
+label{display:block;margin:12px 0 4px;font-weight:600;font-size:.9rem}
+input[type=text],input[type=email],input[type=password]{width:100%;padding:10px 12px;font-size:1rem;border:1px solid var(--border);border-radius:8px;background:#fff;color:var(--text)}
+input:focus{outline:2px solid var(--primary);outline-offset:1px}
+input.invalid{border-color:var(--danger)}
+.error{color:var(--danger);font-size:.85rem;min-height:1.1em;margin-top:4px}
+.alert{background:#fee2e2;color:#991b1b;padding:10px 12px;border-radius:8px;margin-bottom:8px}
+.btn{cursor:pointer;border:1px solid var(--border);background:#fff;color:var(--text);padding:10px 16px;border-radius:8px;font-size:1rem}
+.btn:hover{background:#f8fafc}
+.btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}
+.btn.primary:hover{background:#4338ca}
+.btn.danger{color:var(--danger);border-color:var(--danger)}
+.btn.small{padding:8px 12px;font-size:.9rem}
+.btn.full{width:100%;margin-top:16px}
+.muted{color:var(--muted)}.center{text-align:center}
+a{color:var(--primary)}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.top h1{margin:0}
+.who{display:flex;align-items:center;gap:10px}
+.row{display:flex;align-items:center;gap:8px}
+.grow{flex:1;min-width:0}
+.add-form{margin:12px 0}
+.add-form input{flex:1}
+.todos{list-style:none;padding:0;margin:0}
+.todo{padding:8px 0;border-bottom:1px solid #e2e8f0}
+.todo .row input[type=text]{flex:1;min-width:0}
+.todo.done input[type=text]{text-decoration:line-through;color:var(--muted);background:#f1f5f9}
+.check{width:30px;height:30px;border-radius:50%;border:2px solid var(--border);background:#fff;cursor:pointer;font-size:1rem;color:#fff;padding:0;flex:none}
+.todo.done .check{background:#16a34a;border-color:#16a34a}
+.empty{text-align:center;color:var(--muted);padding:24px 0}
+@media (max-width:480px){
+  .card{margin:0;border-radius:0;min-height:100vh;padding:16px}
+  .todo .row{flex-wrap:wrap}
+  .todo .grow{flex-basis:calc(100% - 44px)}
+}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}My To-Dos{% endblock %}
+{% block content %}
+<header class="top">
+  <h1>To-Do</h1>
+  <div class="who">
+    <span>Hi, {{ name }}</span>
+    <form method="post" action="/logout"><button class="btn small" type="submit">Log out</button></form>
+  </div>
+</header>
+
+<form method="post" action="/todos/add" data-validate="todo" novalidate class="add-form">
+  <div class="row">
+    <input type="text" name="title" placeholder="What needs to be done?" value="{{ add_value }}" class="{{ 'invalid' if add_error }}">
+    <button type="submit" class="btn primary">Add</button>
+  </div>
+  <div class="error" data-error-for="title">{{ add_error or '' }}</div>
+</form>
+
+{% set open_count = todos | rejectattr('is_done') | list | length %}
+{% if todos %}<p class="muted">{{ open_count }} open · {{ todos | length - open_count }} done</p>{% endif %}
+
+{% if not todos %}
+  <p class="empty">🎉 Nothing here yet. Add your first to-do above!</p>
+{% else %}
+<ul class="todos">
+  {% for t in todos %}
+  {% set bad = edit_err and edit_err.id == t.todo_id %}
+  <li class="todo {{ 'done' if t.is_done }}">
+    <div class="row">
+      <form method="post" action="/todos/{{ t.todo_id }}/done">
+        <input type="hidden" name="is_done" value="{{ 0 if t.is_done else 1 }}">
+        <button class="check" type="submit" title="{{ 'Mark as not done' if t.is_done else 'Mark as done' }}">{{ '✓' if t.is_done }}</button>
+      </form>
+      <form method="post" action="/todos/{{ t.todo_id }}/edit" data-validate="todo" novalidate class="grow">
+        <div class="row">
+          <input type="text" name="title" value="{{ edit_err.value if bad else t.title }}" class="{{ 'invalid' if bad }}">
+          <button type="submit" class="btn small">Save</button>
+        </div>
+        <div class="error" data-error-for="title">{{ edit_err.message if bad else '' }}</div>
+      </form>
+      <form method="post" action="/todos/{{ t.todo_id }}/delete" data-confirm="Are you sure you want to delete this to-do?">
+        <button type="submit" class="btn small danger">Delete</button>
+      </form>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

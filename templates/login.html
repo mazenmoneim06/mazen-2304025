@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<h1>Login</h1>
+{% if form_error %}<div class="alert">{{ form_error }}</div>{% endif %}
+<form method="post" action="/login" data-validate="login" novalidate>
+  <label for="email">Email</label>
+  <input id="email" type="email" name="email" value="{{ values.get('email', '') }}" class="{{ 'invalid' if errors.get('email') }}">
+  <div class="error" data-error-for="email">{{ errors.get('email', '') }}</div>
+
+  <label for="password">Password</label>
+  <input id="password" type="password" name="password" class="{{ 'invalid' if errors.get('password') }}">
+  <div class="error" data-error-for="password">{{ errors.get('password', '') }}</div>
+
+  <button type="submit" class="btn primary full">Login</button>
+</form>
+<p class="muted center">No account? <a href="/register">Register</a></p>
+{% endblock %}

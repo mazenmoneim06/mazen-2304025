@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<h1>Create account</h1>
+<form method="post" action="/register" data-validate="register" novalidate>
+  <label for="name">Name</label>
+  <input id="name" type="text" name="name" value="{{ values.get('name', '') }}" class="{{ 'invalid' if errors.get('name') }}">
+  <div class="error" data-error-for="name">{{ errors.get('name', '') }}</div>
+
+  <label for="email">Email</label>
+  <input id="email" type="email" name="email" value="{{ values.get('email', '') }}" class="{{ 'invalid' if errors.get('email') }}">
+  <div class="error" data-error-for="email">{{ errors.get('email', '') }}</div>
+
+  <label for="password">Password</label>
+  <input id="password" type="password" name="password" class="{{ 'invalid' if errors.get('password') }}">
+  <div class="error" data-error-for="password">{{ errors.get('password', '') }}</div>
+
+  <label for="confirm_password">Confirm password</label>
+  <input id="confirm_password" type="password" name="confirm_password" class="{{ 'invalid' if errors.get('confirm_password') }}">
+  <div class="error" data-error-for="confirm_password">{{ errors.get('confirm_password', '') }}</div>
+
+  <button type="submit" class="btn primary full">Register</button>
+</form>
+<p class="muted center">Already registered? <a href="/login">Login</a></p>
+{% endblock %}
